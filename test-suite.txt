@@ -1,0 +1,9 @@
+ls
+cd ..
+pwd
+cd comp-310-project01
+pwd
+cd
+pwd
+cd udsahi
+pwd
