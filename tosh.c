@@ -31,6 +31,39 @@ int main(){
 			fflush(stdout);
 			exit(0);
 		}
+		else if(cmdline == "exit") {
+			fprintf(stdout, "Thank you for using tosh. Have a nice day!\n\n");
+			exit(0);
+		}
+		else if(cmdline == "cd") {
+			getcwd(curDir,50);
+
+			if(argv[1] == NULL){
+				chdir(getenv());
+			}
+			else if(argv[1] == ".."){
+				char curChar;
+
+				for(int i=strlen(curDir)-1; i>=0; i--){
+					curChar = curDir[i];
+					if(curChar == '/')
+					{
+						found = true;
+					}
+
+					if(found == true)
+					{
+						newDirectory[i] = curDir[i];
+					}
+				}
+				curDir = newDirectory;
+				chdir(curDir)
+			}
+			else if(chdir(argv[1]) == -1){
+				fprintf(stderr, "%sDirectory not found.\n", );
+				exit(0);
+			}
+		}	
 
 		fprintf(stdout, "DEBUG: %s\n", cmdline);
 
