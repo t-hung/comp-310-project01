@@ -1,5 +1,5 @@
 /*
- * The Torero Shell (TOSH)
+ The Torero Shell (TOSH)
  *
  * Add your top-level comments here.
  */
@@ -12,11 +12,12 @@
 #include <sys/wait.h>
 #include <readline/readline.h>
 
+typedef enum { false, true } bool;
 
 // TODO: add your function prototypes here as necessary
 
 
-int main(){ 
+int main(int argc, char* argv[]){ 
 
 	// TODO: add a call to signal to register your signal handler on 
 	//       SIGCHLD here
@@ -24,6 +25,9 @@ int main(){
 	while(1) {
 		// (1) read in the next command entered by the user
 		char *cmdline = readline("tosh$ ");
+		char *curDir;
+		bool found;
+		char newDirectory[100];
 
 		// NULL indicates EOF was reached, which in this case means someone
 		// probably typed in CTRL-d
@@ -39,7 +43,8 @@ int main(){
 			getcwd(curDir,50);
 
 			if(argv[1] == NULL){
-				chdir(getenv());
+				getenv(curDir);
+				chdir(curDir);
 			}
 			else if(argv[1] == ".."){
 				char curChar;
@@ -57,10 +62,10 @@ int main(){
 					}
 				}
 				curDir = newDirectory;
-				chdir(curDir)
+				chdir(curDir);
 			}
 			else if(chdir(argv[1]) == -1){
-				fprintf(stderr, "%sDirectory not found.\n", );
+				fprintf(stderr, "%sDirectory not found.\n");
 				exit(0);
 			}
 		}	
