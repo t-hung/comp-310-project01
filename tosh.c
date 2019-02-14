@@ -48,8 +48,8 @@ int main(int argc, char* argv[]){
 			}
 			else if(argv[1] == ".."){
 				char curChar;
-
-				for(int i=strlen(curDir)-1; i>=0; i--){
+				int i = strlen(curDir)-1;
+				for(i; i>=0; i--){
 					curChar = curDir[i];
 					if(curChar == '/')
 					{
@@ -68,7 +68,23 @@ int main(int argc, char* argv[]){
 				fprintf(stderr, "%sDirectory not found.\n");
 				exit(0);
 			}
-		}	
+		}
+		else{
+			//some other stuff
+			//parse the args
+			//fork
+			int child_pid=fork();
+			if(child_pid==-1){
+				//fork failed
+			}
+			else if(child_pid==0){
+				//child
+			}
+			else{
+				//parent
+			}
+			
+		}
 
 		fprintf(stdout, "DEBUG: %s\n", cmdline);
 
